@@ -3,8 +3,10 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
+export { default } from '../.storybook';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import Constants from 'expo-constants';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -16,8 +18,7 @@ export default function RootLayout() {
     // Async font loading only occurs in development.
     return null;
   }
-
-  return (
+ let layout =  (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -26,4 +27,9 @@ export default function RootLayout() {
       <StatusBar style="auto" />
     </ThemeProvider>
   );
+  if (Constants.expoConfig?.extra?.storybookEnabled === 'true') {
+    layout = require('./.storybook').default;
+  }
+
+  return layout;
 }

@@ -1,5 +1,4 @@
-{
-  "expo": {
+module.exports = {
     "name": "narrativeOfWar",
     "slug": "narrativeOfWar",
     "version": "1.0.0",
@@ -24,7 +23,12 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router",
+      [
+        'expo-router',
+        {
+          ...(process.env.STORYBOOK_ENABLED ? { root: '.storybook' } : undefined),
+        }
+    ],
       [
         "expo-splash-screen",
         {
@@ -37,6 +41,9 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      storybookEnabled: process.env.STORYBOOK_ENABLED,
+    },
   }
-}
+

@@ -26,7 +26,7 @@ module.exports = {
       [
         'expo-router',
         {
-          ...(process.env.STORYBOOK_ENABLED ? { root: '.storybook' } : undefined),
+          ...(process.env.STORYBOOK_ENABLED == true ? { root: '.storybook' } : undefined),
         }
     ],
       [
